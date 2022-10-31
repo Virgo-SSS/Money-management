@@ -26,11 +26,11 @@
 <body>
     <div id="app" style="height: 100%">
         <div id="outer-container">
-            <div class="collapse navbar-collapse" id="sidebar">
-                <div class="sidebar">
-                    @include('layouts.sidebar')
-                </div>
+        
+            <div class="sidebar">
+                @include('layouts.sidebar')
             </div>
+            
         
             <div class="content">
                 @include('layouts.navbar')
