@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\TodolistScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,16 @@ class TodoList extends Model
         'completed_at',
         'deadline',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+    */
+    protected static function booted()
+    {
+        static::addGlobalScope(new TodolistScope);
+    }
 
     public function user()
     {

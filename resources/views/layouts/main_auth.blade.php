@@ -18,9 +18,18 @@
 
     {{-- css --}}
     <link rel="stylesheet" href="{{ asset('css/auth/custom.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+    <style>
+        .toast-success {
+            background-color: #4caf50 !important;
+        }
+
+        .toast-error {
+            background-color: #f44336 !important;
+        }
+    </style>
     @yield('css')
     @stack('css')
-
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -42,6 +51,8 @@
     {{-- JAVASCRIPT --}}
     <script src="{{ Vite::js('jquery-3.6.1.min.js') }}"></script>
     <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+
     @yield('js')
     @stack('js')
 

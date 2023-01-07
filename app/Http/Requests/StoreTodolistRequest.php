@@ -28,7 +28,7 @@ class StoreTodolistRequest extends FormRequest
         return [
             'task' => 'required|string|max:255',
             'category' => 'required|integer|', new TodoListCategoryExist(),
-            'date' => 'date',
+            'date' => 'nullable|date',
         ];
     }
 }

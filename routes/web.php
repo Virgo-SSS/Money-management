@@ -45,11 +45,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/todolist', [TodoListController::class, 'index'])->name('todolist');
     Route::get('/todolist/create', [TodoListController::class, 'create'])->name('todolist.create');
     Route::post('/todolist/store', [TodoListController::class, 'store'])->name('todolist.store');
+    Route::post('/todolist/edit', [TodoListController::class, 'edit'])->name('todolist.edit');
+    Route::post('/todolist/update/{todolist}', [TodoListController::class, 'update'])->name('todolist.update');
+    Route::post('/todolist/action', [TodoListController::class, 'action'])->name('todolist.action');
 
     // todolist category routes
     Route::post('/todolist/category/add', [TodoListController::class, 'addCategory'])->name('todolist.add.category');
     Route::post('/todolist/category/update', [TodoListController::class, 'updateCategory'])->name('todolist.update.category');
     Route::post('/todolist/category/delete', [TodoListController::class, 'deleteCategory'])->name('todolist.delete.category');
+
 
     //  Investment
     Route::get('/investment', [InvestmentController::class, 'index'])->name('investment');

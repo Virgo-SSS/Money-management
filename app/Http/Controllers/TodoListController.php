@@ -20,7 +20,7 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        $todolists = TodoList::where('user_id', Auth::id())->get();
+        $todolists = TodoList::all();
         return view('todolist.index', compact('todolists'));
     }
 
@@ -76,5 +76,48 @@ class TodoListController extends Controller
         TodoListCategories::where('id', $request->id)->where('user_id', Auth::id())->delete();
 
         return response()->json(['status' => 'success']);
+    }
+
+
+    public function edit(Request $request)
+    {
+        if($request->json()){
+            $todolist = TodoList::where('id', $request->id)->first();
+
+            $todolist_category = TodoListCategories::where('user_id', Auth::id())->get();
+            return response()->json(json_encode([$todolist, $todolist_category]));
+        }
+    }
+
+    public function update(StoreTodolistRequest $request, TodoList $todolist)
+    {
+        $todolist->update([
+            'task' => $request->task,
+            'category_id' => $request->category,
+            'deadline' => $request->date ?? null,
+        ]);
+
+        return redirect()->route('todolist')->with('success', 'Task updated successfully');
+    }
+
+    public function action(Request $request)
+    {
+        $ids = $request->id;
+        $action = $request->action;
+
+        foreach($ids as $id){
+            $todolist = TodoList::find($id);
+            if($action == 'delete'){
+                $todolist->delete();
+            }
+
+            if($action == 'complete'){
+                $todolist->update([
+                    'completed' => true,
+                ]);
+            }
+        }
+
+        return redirect()->route('todolist')->with('success', 'Task'. $action .'successfully');
     }
 }

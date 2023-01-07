@@ -39,7 +39,7 @@
                                     </span>
                                 </label>
                                 <select name="category" id="category" class="form-control">
-                                        {{-- option get from ajax --}}
+                                    {{-- option get from ajax --}}
                                 </select>
                             </div>
                             <div class="col-xs-12 col-sm-4" style="margin:10px 0px 10px 0px">
