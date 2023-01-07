@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/sass/guest.scss',
+                'resources/sass/settings.scss',
+                'resources/sass/appearance_card.scss'
             ],
             refresh: true,
         }),

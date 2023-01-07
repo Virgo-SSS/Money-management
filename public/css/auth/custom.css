@@ -25,6 +25,7 @@
     --sidebar-shadow-color : rgb(161 172 184 / 12%);
     --sidebar-li-bg-hover-color: #2992ed;
     --sidebar-li-text-hover-color : #ffffff;
+    --sidebar-li-bg-active-color: #E8F8F5;
 
     /* ====== Transition ====== */
     --tran-03: all 0.2s ease;
@@ -50,6 +51,8 @@ body.dark{
     --sidebar-shadow-color : rgba(204, 204, 204, 0.12);
     --sidebar-li-bg-hover-color: #969696;
     --sidebar-li-text-hover-color : #000000;
+    --sidebar-li-bg-active-color: #4a4a4a8a;
+    --sidebar-li-text-active-color: #50a71c;
 }
 
 ::selection{
@@ -66,9 +69,12 @@ body {
 	height: 100%;
     background-color: var(--body-color) !important;
 }
-
-.text-color {
-    color: var(--default-text-color) !important;
+.card {
+    background-color: var(--nav-bg-color) !important;
+}
+#app {
+    display: flex;
+    min-height: 100vh;
 }
 
 .text .name {
@@ -77,33 +83,28 @@ body {
     font-weight: bold;
 }
 
-#outer-container {
-	display: table;
-	width: 100%;
-	height: 100%;
-}
-
-
 .content {
-	display: table-cell;
-	width: 85%;
-	vertical-align: top;
+	flex: 1 1 0;
 }
 
+.hide {
+    display: none;
+}
 
 /* ===== Sidebar ===== */
 .sidebar {
-    height: 100%;
-	display: table-cell;
+    flex: 1 1 0;
+    max-width: 230px;
+    padding: 1.4rem 1rem;
+    /*height: 100%;*/
+	/*display: block;*/
 	vertical-align: top;
     transition: var(--tran-05);
-    z-index: 100;  
-    width: 230px;
+    /*z-index: 100;*/
     color: rgb(105, 122, 141);
     background-color: var(--sidebar-background-color) !important;
     box-shadow: 0 0.125rem 0.375rem 0 var(--sidebar-shadow-color);
-    padding: 10px 14px;
-    position:fixed;
+    /*position:fixed;*/
 }
 
 .sidebar .image-text .image {
@@ -138,6 +139,10 @@ body {
     transition: var(--tran-03);
 }
 
+.sidebar-active {
+    background-color: var(--sidebar-li-bg-active-color) !important;
+}
+
 .sidebar li a:hover{
     background-color: var(--sidebar-li-bg-hover-color);
 }
@@ -145,26 +150,6 @@ body {
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text{
     color: var(--sidebar-li-text-hover-color);
-}
-
-.sidebar li.search-box{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
-}
-
-.sidebar li.search-box input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    background-color: var(--primary-color-light);
-    color: var(--default-text-color);
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
-    transition: var(--tran-05);
 }
 
 .sidebar header .image,
@@ -180,7 +165,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-left: -5px;
 }
 
 .sidebar .text,
@@ -190,10 +176,11 @@ body {
 }
 
 .sidebar .text{
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
+    margin: -15px;
 }
 
 .sidebar header{
@@ -201,58 +188,13 @@ body {
 }
 
 .sidebar header .image-text{
-    display: flex;
     align-items: center;
+    text-align: center;
 }
 
 header .image-text .name {
-    margin-top: 2px;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 600;
-}
-
-header .image-text .profession{
-    font-size: 16px;
-    margin-top: -2px;
-    display: block;
-}
-
-.sidebar header .logo-text{
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar header .image{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar header .image img{
-    width: 40px;
-    border-radius: 6px;
-}
-
-.sidebar header .toggle{
-    position: absolute;
-    top: 50%;
-    right: -25px;
-    transform: translateY(-50%) rotate(180deg);
-    height: 25px;
-    width: 25px;
-    background-color: var(--primary-color);
-    color: var(--sidebar-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    cursor: pointer;
-    transition: var(--tran-05);
-}
-
-body.dark .sidebar header .toggle{
-    color: var(--default-text-color);
 }
 
 .sidebar .menu{
@@ -263,6 +205,34 @@ body.dark .sidebar header .toggle{
     padding-left: 0;
 }
 
+#close-sidebar {
+    display: none;
+}
+/* On screens that are less than 700px wide */
+
+@media (max-width: 767.5px) {
+    .sidebar {
+        position:fixed;
+        top:0;
+        left: -300px;
+        height: 100vh;
+        width: 100%;
+        max-width: 300px;
+        transition: 0.2s linear;
+        display: none;
+    }
+
+    #close-sidebar{
+        display: block;
+    }
+
+    .sidebar.is-active {
+        left: 0;
+        z-index: 999;
+        width: 225px;
+        display: block;
+    }
+}
 
 body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text{
@@ -281,7 +251,7 @@ body.dark .sidebar li a:hover .text{
 }
 .sidebar .menu-bar .mode{
     border-radius: 6px;
-    background-color: var(--primary-color-light);
+    /*background-color: var(--primary-color-light);*/
     position: relative;
     transition: var(--tran-05);
 }
@@ -289,6 +259,7 @@ body.dark .sidebar li a:hover .text{
 .menu-bar .mode .sun-moon{
     height: 30px;
     width: 60px;
+    margin-right: -17px;
 }
 
 .mode .sun-moon i{
@@ -305,10 +276,10 @@ body.dark .mode .sun-moon i.moon{
 }
 
 .menu-bar .bottom-content .toggle-switch{
-    position: absolute;
-    right: 0;
+    /*position: absolute;*/
+    /*right: 0;*/
     height: 100%;
-    min-width: 60px;
+    /*min-width: 60px;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,8 +288,8 @@ body.dark .mode .sun-moon i.moon{
 }
 .toggle-switch .switch{
     position: relative;
-    height: 22px;
-    width: 40px;
+    height: 15px;
+    width: 32px;
     border-radius: 25px;
     background-color: var(--toggle-color);
     transition: var(--tran-05);
@@ -327,8 +298,8 @@ body.dark .mode .sun-moon i.moon{
 .switch::before{
     content: '';
     position: absolute;
-    height: 15px;
-    width: 15px;
+    height: 9px;
+    width: 9px;
     border-radius: 50%;
     top: 50%;
     left: 5px;
@@ -359,4 +330,20 @@ body.dark .switch::before{
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2886, 152, 239, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.text {
+    color: var(--default-text-color) !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

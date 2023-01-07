@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function scopeDuplicate ($query, $attribute, $value) {
+        return $query->where($attribute, $value);
+    }
+
+    public function todolist()
+    {
+        return $this->hasMany(TodoList::class);
+    }
+
+    public function todolistcategories()
+    {
+        return $this->hasMany(TodoListCategory::class);
+    }
+
+    public function themes()
+    {
+        return $this->hasOne(Themes::class);
+    }
 }

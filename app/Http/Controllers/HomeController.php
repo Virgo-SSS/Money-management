@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Themes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user_themes = Auth::user()->themes;
+        if(!$user_themes) {
+            Themes::create([
+                'user_id' => auth()->user()->id,
+                'mode' => 'light',
+            ]);
+        }
+
         return view('home');
     }
 }
