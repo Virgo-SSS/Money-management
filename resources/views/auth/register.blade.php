@@ -27,7 +27,7 @@
 </form>
 
 
-@push('scripts')
+@push('js')
     <script>
         function register_validation(event) {
             let {

@@ -1,4 +1,4 @@
-@extends('layouts.main_auth')
+@extends('layouts.main')
 
 @section('content')
     <div class="container">
@@ -139,9 +139,5 @@
             $('#action').val(act);
             $('#actionAll').submit();
         }
-
-        @if(session('success'))
-            toastr.success('{{ session('success') }}');
-        @endif
     </script>
 @endsection

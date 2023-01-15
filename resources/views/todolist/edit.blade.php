@@ -2,6 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form action="" method="POST">
+                @method('put')
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="title">Edit Todolist</h5>

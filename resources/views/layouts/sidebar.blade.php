@@ -21,12 +21,12 @@
                                 <p class="mb-0">{{ $count_todolist }}</p>
                             </div>
                             <div class="px-3">
-                                <p class="small text-muted mb-1">Followers</p>
-                                <p class="mb-0">976</p>
+                                <p class="small text-muted mb-1">Revenue</p>
+                                <p class="mb-0" style="font-size:12px">{{ number_format($revenueThisMonth, 0, ',', '.') }}</p>
                             </div>
                             <div>
-                                <p class="small text-muted mb-1">Rating</p>
-                                <p class="mb-0">8.5</p>
+                                <p class="small text-muted mb-1">Expense</p>
+                                <p class="mb-0" style="font-size:12px">{{ number_format($expenseThisMonth, 0, ',', '.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -42,6 +42,18 @@
                     <a href="{{ route('home') }}" class="sidebar-active">
                         <i class='bx bx-home-alt icon' ></i>
                         <span class="text nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{{ route('revenue') }}">
+                        <i class='bx bx-money icon'></i>
+                        <span class="text nav-text">Revenue</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="{{ route('expense') }}">
+                        <i class='bx bx-money-withdraw icon'></i>
+                        <span class="text nav-text">Expense</span>
                     </a>
                 </li>
                 <li class="nav-link">

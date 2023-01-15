@@ -52,7 +52,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('layouts.main_guest');
+        return view('layouts.main');
     }
 
     /**

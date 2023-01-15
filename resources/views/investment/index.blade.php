@@ -1,4 +1,4 @@
-@extends('layouts.main_auth')
+@extends('layouts.main')
 
 @section('css')
     <style>
